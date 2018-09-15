@@ -14,7 +14,6 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-<<<<<<< HEAD
     if(request.method == 'GET'):
         print("----------")
         return "-------"
@@ -25,14 +24,12 @@ def upload():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return redirect(url_for('uploaded_file', filename=filename))
-=======
     print("___UPLOAD___")
     print(request)
     file = request.files['file']
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return redirect(url_for('uploaded_file', filename=filename))
->>>>>>> da48a8dcb52994493d9e2564549df8cf109bd795
 
 
 

@@ -68,7 +68,7 @@ class MyView1 extends PolymerElement {
       <div class="title-text">Upload your video to soundtrack:</div>
 
       <div class="card">
-        <vaadin-upload target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}'  form-data-name="mp4-attachment">
+        <vaadin-upload target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
           <iron-icon class="upload" slot="add-button" icon="my-icons:file-upload"></iron-icon>
           <div slot="drop-label-icon" class="empty"></div>
           <div slot="drop-label" class="upload-label">Drop files here</div>
