@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, url_for
+from flask import *
 from werkzeug.utils import secure_filename
 import moviepy.editor
 
@@ -12,28 +12,46 @@ def get_file_path(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return "Johnny Johnny Yes Papa"
+    return "'Johnny Johnny Yes Papa' -- Will Ledig (2018)"
 
 
 @app.route('/upload', methods=['GET', 'POST']) 
 def upload():
-    print("__UPLOAD__")
     if(request.method == 'POST'):
         file = request.files['file']
         filename = secure_filename(file.filename)
         path = get_file_path(filename)
         file.save(path)
-        return redirect(url_for('mp4', filename=filename))
+        return redirect(url_for('testmp4', filename=filename))
     else:
         assert False
 
 
-@app.route('/mp4/<filename>')
-def mp4(filename):
-    path = get_file_path(filename)
-    movie = moviepy.editor.VideoFileClip(path)
-    print("print -- he movie is {secs} seconds".format(secs = movie.duration))
-    return "The movie is {secs} seconds".format(secs = movie.duration)
+@app.route('/parsemp4/<filename>')
+def parsemp4(filename):
+    movie_path = get_file_path(filename)
+    movie = moviepy.editor.VideoFileClip(movie_path)
+    audio = movie.audio # 
+    movie_edited = videoclip.set_audio(my_audioclip)
+    movie_edited_path = get_file_path()
+    return send_file(path)
+
+@app.route('/testmp4/<filename>')
+def testmp4(filename):
+    bh_path = get_file_path("bh.mp4")
+    bh = moviepy.editor.VideoFileClip(bh_path)
+    bh_audio = bh.audio
+
+    movie_path = get_file_path("test.mp4")
+    movie = moviepy.editor.VideoFileClip(movie_path)
+
+    movie_edited = movie.set_audio(bh_audio)
+
+
+    save_filename = "movie-edited.mp4"
+    movie_edited.write_videofile(save_filename)
+    movie_edited_path = get_file_path(save_filename)
+    return send_file(movie_edited_path)
 
 
 
