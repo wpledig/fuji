@@ -60,10 +60,10 @@ class MyApp extends PolymerElement {
         .option-holder {
           width: 75px;
           height: 64px;
-          padding-right: 10px;
-          padding-left: 10px;
+          padding-right: 6px;
+          padding-left: 6px;
           display: inline-block;
-          font-size: 20px;
+          font-size: 16px;
           position: relative;
         }
         
@@ -83,7 +83,7 @@ class MyApp extends PolymerElement {
         }
         
         .options:hover {
-          font-size: 21px;
+          font-size: 17px;
         }
 
 
