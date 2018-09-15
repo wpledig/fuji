@@ -76,7 +76,17 @@ class MyView1 extends PolymerElement {
         vaadin-upload {
             text-align: center;
             /*cursor: pointer;*/
-            
+        }
+        :host([state]) vaadin-upload {
+          display: none;
+        }
+        
+        .video-container {
+          display: none;
+        }
+        
+        :host([state]) .video-container {
+          display: block;
         }
         
         .main {
@@ -98,20 +108,12 @@ class MyView1 extends PolymerElement {
       
       
       <div class="main">
+      
       <div class="card">
       <div class="title-text">Upload a video to generate background music!</div>
       <div class="subtitle-text">(Need help? Please check out our <span class="about-link" on-click="goAbout">about page</span>!)</div>
-      
-      
-      <template is="dom-if" if="true">
-        <style>
-        vaadin-upload [part="drop-label"], #dropLabelContainer {
-            display: none !important;
-        }
-        </style>
-      </template>
-        <vaadin-upload id="uploadButton" upload-success="startLoad" target="http://0.0.0.0:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
-          
+     
+        <vaadin-upload id="uploadButton" target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
           <div slot="add-button" style="text-align: center; display: inline-block; margin-right: -14px;">
             <iron-icon class="upload" icon="my-icons:file-upload"></iron-icon>
             <div style="display: block; text-align: center;">Drop Files Here</div>
@@ -120,7 +122,13 @@ class MyView1 extends PolymerElement {
           <div slot="drop-label" class="empty"></div>
         </vaadin-upload>
         
+        <div class="video-container">
+          <video width="320" height="240" controls>
+             <source src="../video.mp4" type="video/mp4">
+           </video>
+        </div>
       </div>
+      
       </div>
       
     `;
@@ -131,6 +139,11 @@ class MyView1 extends PolymerElement {
             page: {
                 type: String,
                 notify: true,
+            },
+            state: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
             }
         };
     }
@@ -142,8 +155,9 @@ class MyView1 extends PolymerElement {
 
     ready() {
       super.ready();
-        this.$.uploadButton.addEventListener('upload-success', function() {
-            console.log('!!!');
+        this.$.uploadButton.addEventListener('upload-success', (a,b,c) => {
+            console.log(a);
+            this.state = true;
         });
     }
 
