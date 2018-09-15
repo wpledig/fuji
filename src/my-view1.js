@@ -17,23 +17,28 @@ import '@vaadin/vaadin-upload/vaadin-upload.js';
 class MyView1 extends PolymerElement {
   static get template() {
     return html`
-      <style include="shared-styles">
+      <style >
         :host {
           display: block;
           
           padding: 10px;
         }
         .card {
-          margin: 24px;
+        margin-top: 15%;
           position: absolute;
+                  padding: 16px;
           text-align: center;
           top: 50%; left: 50%;
           transform: translate(-50%,-50%); 
-          padding: 16px;
           color: #757575;
           border-radius: 5px;
           background-color: #fff;
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        }
+        .title-text {
+          font-size: 30px;
+          text-align: center;
+          margin-top: 10%;
         }
         
         .upload {
@@ -46,15 +51,30 @@ class MyView1 extends PolymerElement {
         width: 0;
         }
         
+        .upload-label {
+          font-size: 20px;
+        }
+        
+        vaadin-upload {
+            cursor: pointer;
+        }
+        
+        .main {
+        position: relative;
+        }
         
       </style>
 
+      <div class="main">
+      <div class="title-text">Upload your video to soundtrack:</div>
+
       <div class="card">
-        <vaadin-upload target="serverUrl" method="POST" timeout="300000" headers="{'X-Custom-Header': 'value'}" form-data-name="my-attachment">
+        <vaadin-upload target="upload" method="POST" timeout="300000"  form-data-name="mp4-attachment">
           <iron-icon class="upload" slot="add-button" icon="my-icons:file-upload"></iron-icon>
           <div slot="drop-label-icon" class="empty"></div>
-          <div slot="drop-label" class="empty"></div>
+          <div slot="drop-label" class="upload-label">Drop files here</div>
         </vaadin-upload>
+      </div>
       </div>
       
     `;
