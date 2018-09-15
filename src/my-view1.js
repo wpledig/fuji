@@ -10,6 +10,8 @@
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
+import './my-icons.js';
+import '@polymer/iron-icon/iron-icon.js'
 import '@vaadin/vaadin-upload/vaadin-upload.js';
 
 class MyView1 extends PolymerElement {
@@ -36,7 +38,9 @@ class MyView1 extends PolymerElement {
       </style>
 
       <div class="card">
-        <vaadin-upload></vaadin-upload>
+        <vaadin-upload>
+          <iron-icon slot="add-button" icon="my-icons:"></iron-icon>
+        </vaadin-upload>
       </div>
       
     `;
