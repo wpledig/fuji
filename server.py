@@ -10,6 +10,7 @@ app.config["UPLOAD_FOLDER"] = "mp4"
 def get_file_path(filename):
     return os.path.join(app.config["UPLOAD_FOLDER"], str(filename))
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return "'Johnny Johnny Yes Papa' -- Will Ledig (2018)"
@@ -22,43 +23,54 @@ def upload():
         filename = secure_filename(file.filename)
         path = get_file_path(filename)
         file.save(path)
-        return redirect(url_for('testmp4', filename=filename))
+        return redirect(url_for('parsemp4', filename=filename))
     else:
         assert False
 
 
 @app.route('/parsemp4/<filename>')
 def parsemp4(filename):
-    movie_path = get_file_path(filename)
-    movie = moviepy.editor.VideoFileClip(movie_path)
-    audio = movie.audio # 
-    movie_edited = videoclip.set_audio(my_audioclip)
-    movie_edited_path = get_file_path()
-    return send_file(path)
-
-@app.route('/testmp4/<filename>')
-def testmp4(filename):
+    print("mp4 parsing")
     file_path = get_file_path(filename)
     file = moviepy.editor.VideoFileClip(file_path)
-    file_edited = file.subclip(0, 60).volumex(5.5)
+    audio = file.audio
+    print("extracted audio")
+    new_audio = fetch_audio(file)
+    file_edited = file.set_audio(new_audio)
     name, xtn = filename.split(".")
     write_path = get_file_path(name+"_edited."+ xtn)
     file_edited.write_videofile(write_path)
+    print("sending")
     return send_file(write_path)
-    #file_audio = bh.audio
 
-    #movie_path = get_file_path("test.mp4")
-    #movie = moviepy.editor.VideoFileClip(movie_path)
+def frame_anal(frame):
+    print("frame-anal")
+    frame_sum = 0
+    pixel_count = 0.0
+    for row in frame:
+        for pixel in row:
+            frame_sum+=sum(pixel)/len(pixel)
+            pixel_count+=1.0
+    print(frame_sum, pixel_count)
+    return frame_sum/pixel_count
 
-    #movie_edited = movie.set_audio(bh_audio)
+
+def fetch_audio(file):
+    video_sum = 0
+    print("fetching audio")
+    num_steps = 10
+    step = file.duration/num_steps
+    print(step)
+    for t in range(0, int(file.duration), int(step)):
+        frame = file.get_frame(t)
+        video_sum+=frame_anal(frame)
+    print("Composite video score: "+str(video_sum))
+    return generate_audio(file, video_sum)
 
 
-    #movie_edited_filename = "movie-edited.mp4"
-    #movie_edited_path = get_file_path(movie_edited_filename)
-    #movie_edited.write_videofile(movie_edited_path)
-    #return send_file(movie_edited_path)
-
-
+def generate_audio(file, video_sum):
+    print("generating audio")
+    return file.audio
 
 
 if __name__ == '__main__':
