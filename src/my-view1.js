@@ -147,7 +147,8 @@ class MyView1 extends PolymerElement {
         
         <div class="video-container">
           <video width="640" height="360" controls>
-             <source src="../mp4/test.mp4" type="video/mp4">
+             <source src$="http://localhost:5000/parsemp4/[[filename]].mp4" type="video/mp4">
+             <!-- http://localhost:5000/parsemp4/{{filename}}.mp4 -->
            </video>
         </div>
       </div>
@@ -165,8 +166,12 @@ class MyView1 extends PolymerElement {
             },
             state: {
                 type: Boolean,
-                value: false,
+                value: true,
                 reflectToAttribute: true
+            },
+            filename: {
+                type: String,
+                value: 'test'
             }
         };
     }
@@ -182,8 +187,10 @@ class MyView1 extends PolymerElement {
 
     ready() {
       super.ready();
-        this.$.uploadButton.addEventListener('upload-success', (a,b,c) => {
-            console.log(a);
+        this.$.uploadButton.addEventListener('upload-success', (e) => {
+            console.log(e);
+            this.filename = e.detail.file.name.split(' ').join('_');
+            console.log(this.filename);
             this.state = true;
         });
     }
