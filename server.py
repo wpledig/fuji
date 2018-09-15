@@ -38,22 +38,28 @@ def parsemp4(filename):
 
 @app.route('/testmp4/<filename>')
 def testmp4(filename):
-    bh_path = get_file_path("bh.mp4")
-    bh = moviepy.editor.VideoFileClip(bh_path)
-    bh_audio = bh.audio
+    file_path = get_file_path(filename)
+    file = moviepy.editor.VideoFileClip(file_path)
+    file_edited = file.subclip(0, 60)
+    name, xtn = filename.split(".")
+    write_path = get_file_path(name+"_edited."+ xtn)
+    file_edited.write_videofile(write_path)
+    return send_file(write_path)
+    #file_audio = bh.audio
 
-    movie_path = get_file_path("test.mp4")
-    movie = moviepy.editor.VideoFileClip(movie_path)
+    #movie_path = get_file_path("test.mp4")
+    #movie = moviepy.editor.VideoFileClip(movie_path)
 
-    movie_edited = movie.set_audio(bh_audio)
+    #movie_edited = movie.set_audio(bh_audio)
 
 
-    save_filename = "movie-edited.mp4"
-    movie_edited.write_videofile(save_filename)
-    movie_edited_path = get_file_path(save_filename)
-    return send_file(movie_edited_path)
+    #movie_edited_filename = "movie-edited.mp4"
+    #movie_edited_path = get_file_path(movie_edited_filename)
+    #movie_edited.write_videofile(movie_edited_path)
+    #return send_file(movie_edited_path)
+
 
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host = '127.0.0.1', port=5000)
