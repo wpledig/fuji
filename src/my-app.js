@@ -36,41 +36,57 @@ class MyApp extends PolymerElement {
     return html`
       <style>
         :host {
-          --app-primary-color: #4285f4;
+          --app-primary-color: #a8ffd3;
           --app-secondary-color: black;
 
           display: block;
         }
 
-        app-drawer-layout:not([narrow]) [drawer-toggle] {
-          display: none;
-        }
 
         app-header {
-          color: #fff;
-          background-color: var(--app-primary-color);
+          color: rgba(0,0,0,0.98);
+          /*background-color: var(--app-primary-color);*/
+          background-image: linear-gradient(30deg, #beffd5, #beffff);
         }
 
         app-header paper-icon-button {
           --paper-icon-button-ink-color: white;
         }
-
-        .drawer-list {
-          margin: 0 20px;
+        
+        .logo {
+          padding-left: 20px;
         }
-
-        .drawer-list a {
-          display: block;
-          padding: 0 16px;
-          text-decoration: none;
-          color: var(--app-secondary-color);
-          line-height: 40px;
+        
+        .option-holder {
+          width: 75px;
+          height: 64px;
+          padding-right: 10px;
+          padding-left: 10px;
+          display: inline-block;
+          font-size: 20px;
+          position: relative;
         }
-
-        .drawer-list a.iron-selected {
-          color: black;
+        
+        .option-holder.iron-selected {
           font-weight: bold;
         }
+        
+        .options {
+          position: absolute;
+          text-align: center;
+          top: 50%; left: 50%;
+          transform: translate(-50%,-50%);          
+          cursor: pointer;
+          margin: 0 auto;
+          display: inline-block;
+          
+        }
+        
+        .options:hover {
+          font-size: 21px;
+        }
+
+
       </style>
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
@@ -80,30 +96,23 @@ class MyApp extends PolymerElement {
       </app-route>
 
       <app-drawer-layout fullbleed="" narrow="{{narrow}}">
-        <!-- Drawer content -->
-        <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-          <app-toolbar>Menu</app-toolbar>
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <a name="view1" href="[[rootPath]]view1">View One</a>
-            <a name="view2" href="[[rootPath]]view2">View Two</a>
-            <a name="view3" href="[[rootPath]]view3">View Three</a>
-          </iron-selector>
-        </app-drawer>
 
         <!-- Main content -->
         <app-header-layout has-scrolling-region="">
 
-          <app-header slot="header" condenses="" reveals="" effects="waterfall">
+          <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 5px 0 #474747">
             <app-toolbar>
-              <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
-              <div main-title="">My App</div>
+              <div main-title="" class="logo">TrackIT</div>
+              <iron-selector selected="{{page}}" attr-for-selected="name">
+                <div class="option-holder" name="home"><div class="options" >Home</div></div>
+                <div class="option-holder" name="about"><div class="options" >About</div></div>
+              </iron-selector>
             </app-toolbar>
           </app-header>
 
           <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
-            <my-view1 name="view1"></my-view1>
-            <my-view2 name="view2"></my-view2>
-            <my-view3 name="view3"></my-view3>
+            <my-view1 name="home"></my-view1>
+            <my-view2 name="about"></my-view2>
             <my-view404 name="view404"></my-view404>
           </iron-pages>
         </app-header-layout>
@@ -129,23 +138,27 @@ class MyApp extends PolymerElement {
     ];
   }
 
+  goHome() {
+    this.page = 'home';
+  }
+
+  goAbout() {
+    this.page = 'about';
+  }
+
   _routePageChanged(page) {
      // Show the corresponding page according to the route.
      //
      // If no page was found in the route data, page will be an empty string.
      // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
     if (!page) {
-      this.page = 'view1';
-    } else if (['view1', 'view2', 'view3'].indexOf(page) !== -1) {
+      this.page = 'home';
+    } else if (['home', 'about'].indexOf(page) !== -1) {
       this.page = page;
     } else {
       this.page = 'view404';
     }
 
-    // Close a non-persistent drawer when the page & route are changed.
-    if (!this.$.drawer.persistent) {
-      this.$.drawer.close();
-    }
   }
 
   _pageChanged(page) {
@@ -153,15 +166,14 @@ class MyApp extends PolymerElement {
     //
     // Note: `polymer build` doesn't like string concatenation in the import
     // statement, so break it up.
+      window.history.pushState(null, null, '/' + page);
+
     switch (page) {
-      case 'view1':
+      case 'home':
         import('./my-view1.js');
         break;
-      case 'view2':
+      case 'about':
         import('./my-view2.js');
-        break;
-      case 'view3':
-        import('./my-view3.js');
         break;
       case 'view404':
         import('./my-view404.js');
