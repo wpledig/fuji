@@ -7,19 +7,23 @@ UPLOAD_FOLDER = '/Uploads'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return "Johnny Johnny Yes Papa"
 
-@app.route('/upload', methods=['POST'])
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
-<<<<<<< HEAD
-	print("___UPLOAD___")
-	print(request)
-=======
-    print("___UPLOAD___")
->>>>>>> fc7c6a2fb6c0ff3f63cec4a71a9588318c1e62c8
-    file = request.files['file']
-    filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    return redirect(url_for('uploaded_file', filename=filename))
+    if(request.method == 'GET'):
+        print("----------")
+        return "-------"
+    else:
+        print("___UPLOAD___")
+        print(request)
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('uploaded_file', filename=filename))
 
 
 
