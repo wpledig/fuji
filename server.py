@@ -30,21 +30,25 @@ def upload():
 
 @app.route('/parsemp4/<filename>')
 def parsemp4(filename):
-    print("mp4 parsing")
+    name, xtn = filename.split(".")
+    new_filename = name+"_edited."+ xtn
+    new_file_path = get_file_path(new_filename)
+    if(os.path.isfile(new_file_path)):
+        return send_file(new_file_path)
+
+    #print("mp4 parsing")
     file_path = get_file_path(filename)
     file = moviepy.editor.VideoFileClip(file_path)
     audio = file.audio
-    print("extracted audio")
+
     new_audio = fetch_audio(file)
     file_edited = file.set_audio(new_audio)
-    name, xtn = filename.split(".")
-    write_path = get_file_path(name+"_edited."+ xtn)
-    file_edited.write_videofile(write_path)
-    print("sending")
-    return send_file(write_path)
+    file_edited.write_videofile(new_file_path)
+    #print("sending")
+    return send_file(new_file_path)
 
 def frame_anal(frame):
-    print("frame-anal")
+    #print("frame-anal")
     frame_sum = 0
     pixel_count = 0.0
     for row in frame:
@@ -57,19 +61,19 @@ def frame_anal(frame):
 
 def fetch_audio(file):
     video_sum = 0
-    print("fetching audio")
+    #print("fetching audio")
     num_steps = 10
     step = file.duration/num_steps
-    print(step)
+    #print(step)
     for t in range(0, int(file.duration), int(step)):
         frame = file.get_frame(t)
         video_sum+=frame_anal(frame)
-    print("Composite video score: "+str(video_sum))
+    #print("Composite video score: "+str(video_sum))
     return generate_audio(file, video_sum)
 
 
 def generate_audio(file, video_sum):
-    print("generating audio")
+    #print("generating audio")
     return file.audio
 
 
