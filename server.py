@@ -1,8 +1,10 @@
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
+import moviepy.editor
 
-UPLOAD_FOLDER = '/Uploads'
+
+UPLOAD_FOLDER = '/mp4'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -12,33 +14,22 @@ def index():
     return "Johnny Johnny Yes Papa"
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST']) 
 def upload():
-<<<<<<< HEAD
-    if(request.method == 'GET'):
-        print("----------")
-        return "-------"
-    else:
-        print("___UPLOAD___")
-        print(request)
-        file = request.files['file']
+    if(request.method == 'POST'):
+        file = request.files['mp4-attachment']
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file', filename=filename))
-=======
-    print("___UPLOAD___")
-    print(request)
-    file = request.files['file']
-    filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    return redirect(url_for('uploaded_file', filename=filename))
->>>>>>> da48a8dcb52994493d9e2564549df8cf109bd795
+        file.save(str(filename))
+        return redirect(url_for('mp4', filename=filename))
+    else:
+        assert False
 
 
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return "Hello World"
+@app.route('/mp4/<filename>')
+def mp4(filename):
+    movie = moviepy.editor.VideoFileClip(filename)
+    print("print -- he movie is {secs} seconds".format(secs = movie.duration))
+    return "The movie is {secs} seconds".format(secs = movie.duration)
 
 
 
