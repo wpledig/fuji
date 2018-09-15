@@ -39,7 +39,7 @@ class MyView1 extends PolymerElement {
 
       <div class="card">
         <vaadin-upload>
-          <iron-icon slot="add-button" icon="my-icons:file-upload"></iron-icon>
+          <iron-icon slot="add-button" icon="my-icons:file-uploa"></iron-icon>
         </vaadin-upload>
       </div>
       
