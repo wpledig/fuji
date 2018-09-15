@@ -46,12 +46,13 @@ class MyView1 extends PolymerElement {
         .title-text {
           font-size: 30px;
           text-align: center;
-          margin-top: 3%;
+          /*margin-top: 3%;*/
         }
         .subtitle-text {
           font-size: 15px;
           text-align: center;
           margin-top: 10px;
+          padding-bottom: 20px;
         }
         
         .upload {
@@ -91,23 +92,15 @@ class MyView1 extends PolymerElement {
         .about-link:hover {
           color: #1994ff;
         }
+
         
       </style>
-      <dom-module id="my-text-field" theme-for="vaadin-upload">
-      <template is="dom-if" if="true">
-        <style>
-        [part="drop-label"], #dropLabelContainer {
-            display: none !important;
-        }
-        </style>
-      </template>
-      </dom-module>
-
+      
+      
       <div class="main">
+      <div class="card">
       <div class="title-text">Upload a video to generate background music!</div>
       <div class="subtitle-text">(Need help? Please check out our <span class="about-link" on-click="goAbout">about page</span>!)</div>
-
-      <div class="card">
       
       
       <template is="dom-if" if="true">
@@ -145,6 +138,9 @@ class MyView1 extends PolymerElement {
     goAbout() {
       this.page = 'about';
     }
+
+
+
 }
 
 window.customElements.define('my-view1', MyView1);

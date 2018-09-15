@@ -88,6 +88,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Load your application shell -->
     <script type="module" src="src/my-app.js"></script>
+    <script src="imports/particles.min.js"></script>
+    <script src="imports/particles.js"></script>
+
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -99,14 +102,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 1.5;
         min-height: 100vh;
         background-color: #ffffff;
+
+      }
+
+      canvas {
+        display:block;
+        background: #fff;
+        position: fixed;
+        z-index: -1;
+      }
+      .holder-div {
+        position: absolute;
+        height: 100%;
+        width: 100%;
       }
     </style>
   </head>
+
   <body>
-    <my-app></my-app>
+  <div id="particles-js"></div>
+  <div class="holder-div">
+    <my-app></my-app></div>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
     <!-- Built with love using Polymer Starter Kit -->
   </body>
+
+<script src="src/bubbles.js"></script>
+
 </html>

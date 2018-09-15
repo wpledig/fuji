@@ -96,6 +96,8 @@ class MyApp extends PolymerElement {
 
 
       </style>
+      
+      <!--<div id="particles-js"></div>-->
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
       </app-location>
@@ -188,6 +190,7 @@ class MyApp extends PolymerElement {
         break;
     }
   }
+
 }
 
 window.customElements.define('my-app', MyApp);

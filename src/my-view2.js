@@ -14,22 +14,62 @@ import './shared-styles.js';
 class MyView2 extends PolymerElement {
   static get template() {
     return html`
-      <style include="shared-styles">
+      <style>
         :host {
           display: block;
-
           padding: 10px;
+        }
+        .question-list {
+        text-align: center;
+        }
+        
+        .holder {
+           width: 70%;
+        margin-top: 20px;
+                  padding: 16px;
+          text-align: center;
+          display: inline-block;
+          color: #757575;
+          border-radius: 5px;
+          background-color: #fff;
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        
+        }
+        
+        .question {
+        
+        }
+        
+        .answer {
+        
         }
       </style>
 
-      <div class="card">
-        <div class="circle">2</div>
-        <h1>View Two</h1>
-        <p>Ea duis bonorum nec, falli paulo aliquid ei eum.</p>
-        <p>Id nam odio natum malorum, tibique copiosae expetenda mel ea.Detracto suavitate repudiandae no eum. Id adhuc minim soluta nam.Id nam odio natum malorum, tibique copiosae expetenda mel ea.</p>
+        
+
+
+    <div class="question-list">
+      <div class="holder">
+        <div class="question">What is HackIT?</div>
+        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
       </div>
+      <div class="holder">
+        <div class="question">What is HackIT?</div>
+        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+      </div>
+      <div class="holder">
+        <div class="question">What is HackIT?</div>
+        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+      </div>
+      <div class="holder">
+        <div class="question">What is HackIT?</div>
+        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+      </div>
+    </div>
     `;
   }
+
+
 }
 
 window.customElements.define('my-view2', MyView2);
