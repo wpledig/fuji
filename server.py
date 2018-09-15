@@ -4,10 +4,11 @@ from werkzeug.utils import secure_filename
 import moviepy.editor
 
 
-UPLOAD_FOLDER = '/mp4'
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config["UPLOAD_FOLDER"] = "mp4"
+
+def get_file_path(filename):
+    return os.path.join(app.config["UPLOAD_FOLDER"], str(filename))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -16,10 +17,12 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST']) 
 def upload():
+    print("__UPLOAD__")
     if(request.method == 'POST'):
-        file = request.files['mp4-attachment']
+        file = request.files['file']
         filename = secure_filename(file.filename)
-        file.save(str(filename))
+        path = get_file_path(filename)
+        file.save(path)
         return redirect(url_for('mp4', filename=filename))
     else:
         assert False
@@ -27,7 +30,8 @@ def upload():
 
 @app.route('/mp4/<filename>')
 def mp4(filename):
-    movie = moviepy.editor.VideoFileClip(filename)
+    path = get_file_path(filename)
+    movie = moviepy.editor.VideoFileClip(path)
     print("print -- he movie is {secs} seconds".format(secs = movie.duration))
     return "The movie is {secs} seconds".format(secs = movie.duration)
 
