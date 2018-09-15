@@ -42,8 +42,8 @@ class MyView1 extends PolymerElement {
         }
         
         .upload {
-          height: 64px;
-          width: 64px;
+          height: 32px;
+          width: 32px;
         }
         
         .empty {
