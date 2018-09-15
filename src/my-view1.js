@@ -110,7 +110,7 @@ class MyView1 extends PolymerElement {
         }
         </style>
       </template>
-        <vaadin-upload target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
+        <vaadin-upload id="uploadButton" upload-success="startLoad" target="http://0.0.0.0:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
           
           <div slot="add-button" style="text-align: center; display: inline-block; margin-right: -14px;">
             <iron-icon class="upload" icon="my-icons:file-upload"></iron-icon>
@@ -137,6 +137,14 @@ class MyView1 extends PolymerElement {
 
     goAbout() {
       this.page = 'about';
+    }
+
+
+    ready() {
+      super.ready();
+        this.$.uploadButton.addEventListener('upload-success', function() {
+            console.log('!!!');
+        });
     }
 
 

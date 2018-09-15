@@ -37,11 +37,12 @@ class MyView2 extends PolymerElement {
         }
         
         .question {
-        
+          font-size: 22px;
+          font-weight: bold;
         }
         
         .answer {
-        
+            font-size: 15px;
         }
       </style>
 
@@ -50,20 +51,20 @@ class MyView2 extends PolymerElement {
 
     <div class="question-list">
       <div class="holder">
-        <div class="question">What is HackIT?</div>
-        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">What is TrackIT?</div>
+        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham for HackRice 8.</div>
       </div>
       <div class="holder">
-        <div class="question">What is HackIT?</div>
-        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">What is TrackIT?</div>
+        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
       </div>
       <div class="holder">
-        <div class="question">What is HackIT?</div>
-        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">What is TrackIT?</div>
+        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
       </div>
       <div class="holder">
-        <div class="question">What is HackIT?</div>
-        <div class="answer">HackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">What is TrackIT?</div>
+        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
       </div>
     </div>
     `;
