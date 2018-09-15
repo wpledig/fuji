@@ -23,12 +23,21 @@ class MyView1 extends PolymerElement {
           
           padding: 10px;
         }
+        
+        :host [part="drop-label"] {
+          display: none;
+        }
+        
+        #dropLabelContainer {
+            display: none !important;
+        }
+        
         .card {
-        margin-top: 15%;
+        width: 70%;
+        margin-top: 20px;
                   padding: 16px;
           text-align: center;
-            left: 50%; right
-          transform: translate(-50%,-50%); 
+          display: inline-block;
           color: #757575;
           border-radius: 5px;
           background-color: #fff;
@@ -37,17 +46,26 @@ class MyView1 extends PolymerElement {
         .title-text {
           font-size: 30px;
           text-align: center;
-          margin-top: 10%;
+          margin-top: 3%;
+        }
+        .subtitle-text {
+          font-size: 15px;
+          text-align: center;
+          margin-top: 10px;
         }
         
         .upload {
-          height: 32px;
-          width: 32px;
+        display: inline-block;
+          height: 45px;
+          width: 45px;
+          cursor: pointer;
         }
         
         .empty {
         height: 0;
         width: 0;
+        display: none;
+        visibility: hidden;
         }
         
         .upload-label {
@@ -55,29 +73,78 @@ class MyView1 extends PolymerElement {
         }
         
         vaadin-upload {
-            cursor: pointer;
+            text-align: center;
+            /*cursor: pointer;*/
+            
         }
         
         .main {
         position: relative;
+        text-align: center;
+        }
+        
+        .about-link {
+          color: #1fb5ff;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+        .about-link:hover {
+          color: #1994ff;
         }
         
       </style>
+      <dom-module id="my-text-field" theme-for="vaadin-upload">
+      <template is="dom-if" if="true">
+        <style>
+        [part="drop-label"], #dropLabelContainer {
+            display: none !important;
+        }
+        </style>
+      </template>
+      </dom-module>
 
       <div class="main">
-      <div class="title-text">Upload your video to soundtrack:</div>
+      <div class="title-text">Upload a video to generate background music!</div>
+      <div class="subtitle-text">(Need help? Please check out our <span class="about-link" on-click="goAbout">about page</span>!)</div>
 
       <div class="card">
-        <vaadin-upload target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}'  form-data-name="mp4-attachment">
-          <iron-icon class="upload" slot="add-button" icon="my-icons:file-upload"></iron-icon>
+      
+      
+      <template is="dom-if" if="true">
+        <style>
+        vaadin-upload [part="drop-label"], #dropLabelContainer {
+            display: none !important;
+        }
+        </style>
+      </template>
+        <vaadin-upload target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
+          
+          <div slot="add-button" style="text-align: center; display: inline-block; margin-right: -14px;">
+            <iron-icon class="upload" icon="my-icons:file-upload"></iron-icon>
+            <div style="display: block; text-align: center;">Drop Files Here</div>
+          </div>
           <div slot="drop-label-icon" class="empty"></div>
-          <div slot="drop-label" class="upload-label">Drop files here</div>
+          <div slot="drop-label" class="empty"></div>
         </vaadin-upload>
+        
       </div>
       </div>
       
     `;
   }
+
+    static get properties() {
+        return {
+            page: {
+                type: String,
+                notify: true,
+            }
+        };
+    }
+
+    goAbout() {
+      this.page = 'about';
+    }
 }
 
 window.customElements.define('my-view1', MyView1);
