@@ -40,7 +40,7 @@ def parsemp4(filename):
 def testmp4(filename):
     file_path = get_file_path(filename)
     file = moviepy.editor.VideoFileClip(file_path)
-    file_edited = file.subclip(0, 60)
+    file_edited = file.subclip(0, 60).volumex(1.5)
     name, xtn = filename.split(".")
     write_path = get_file_path(name+"_edited."+ xtn)
     file_edited.write_videofile(write_path)
