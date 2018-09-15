@@ -49,7 +49,7 @@ class MyApp extends PolymerElement {
         app-header {
           color: rgba(0,0,0,0.98);
           /*background-color: var(--app-primary-color);*/
-          background-image: linear-gradient(30deg, #beffd5, #beffff);
+          background-image: linear-gradient(30deg, #e3ffef, #d3ffff);
         }
 
         app-header paper-icon-button {

@@ -48,11 +48,30 @@ class MyView1 extends PolymerElement {
           text-align: center;
           /*margin-top: 3%;*/
         }
+        :host([state]) .title-text, :host([state]) .subtitle-text {
+          display: none;
+        }
+        
         .subtitle-text {
           font-size: 15px;
           text-align: center;
           margin-top: 10px;
           padding-bottom: 20px;
+        }
+        
+        .result-text {
+          display: none;
+          font-size: 30px;
+        }
+        
+        .goback-text {
+          display: none;
+          padding-bottom: 20px;
+          font-size: 15px;
+          margin-top: 10px;
+        }
+        :host([state]) .result-text, :host([state]) .goback-text {
+          display: block;
         }
         
         .upload {
@@ -113,6 +132,10 @@ class MyView1 extends PolymerElement {
       <div class="title-text">Upload a video to generate background music!</div>
       <div class="subtitle-text">(Need help? Please check out our <span class="about-link" on-click="goAbout">about page</span>!)</div>
      
+     <div class="result-text">Here's your video!</div>
+     <div class="goback-text">(To generate background music for another video, <span class="about-link" on-click="goUpload">click here</span>.)</div>
+     
+     
         <vaadin-upload id="uploadButton" target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
           <div slot="add-button" style="text-align: center; display: inline-block; margin-right: -14px;">
             <iron-icon class="upload" icon="my-icons:file-upload"></iron-icon>
@@ -123,8 +146,8 @@ class MyView1 extends PolymerElement {
         </vaadin-upload>
         
         <div class="video-container">
-          <video width="320" height="240" controls>
-             <source src="../video.mp4" type="video/mp4">
+          <video width="640" height="360" controls>
+             <source src="../mp4/test.mp4" type="video/mp4">
            </video>
         </div>
       </div>
@@ -152,6 +175,10 @@ class MyView1 extends PolymerElement {
       this.page = 'about';
     }
 
+    goUpload() {
+      this.state = false;
+    }
+
 
     ready() {
       super.ready();
@@ -160,6 +187,8 @@ class MyView1 extends PolymerElement {
             this.state = true;
         });
     }
+
+
 
 
 
