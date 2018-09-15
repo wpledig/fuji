@@ -41,7 +41,10 @@ class MyApp extends PolymerElement {
 
           display: block;
         }
-
+        
+        :host [part="drop-label"] {
+          display: none;
+        }
 
         app-header {
           color: rgba(0,0,0,0.98);
