@@ -48,11 +48,17 @@ class MyView1 extends PolymerElement {
           text-align: center;
           margin-top: 3%;
         }
+        .subtitle-text {
+          font-size: 15px;
+          text-align: center;
+          margin-top: 10px;
+        }
         
         .upload {
         display: inline-block;
           height: 45px;
           width: 45px;
+          cursor: pointer;
         }
         
         .empty {
@@ -68,13 +74,22 @@ class MyView1 extends PolymerElement {
         
         vaadin-upload {
             text-align: center;
-            cursor: pointer;
+            /*cursor: pointer;*/
             
         }
         
         .main {
         position: relative;
         text-align: center;
+        }
+        
+        .about-link {
+          color: #1fb5ff;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+        .about-link:hover {
+          color: #1994ff;
         }
         
       </style>
@@ -90,6 +105,7 @@ class MyView1 extends PolymerElement {
 
       <div class="main">
       <div class="title-text">Upload a video to generate background music!</div>
+      <div class="subtitle-text">(Need help? Please check out our <span class="about-link" on-click="goAbout">about page</span>!)</div>
 
       <div class="card">
       
@@ -116,6 +132,19 @@ class MyView1 extends PolymerElement {
       
     `;
   }
+
+    static get properties() {
+        return {
+            page: {
+                type: String,
+                notify: true,
+            }
+        };
+    }
+
+    goAbout() {
+      this.page = 'about';
+    }
 }
 
 window.customElements.define('my-view1', MyView1);

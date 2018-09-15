@@ -57,7 +57,9 @@ class MyApp extends PolymerElement {
         }
         
         .logo {
-          padding-left: 20px;
+          /*padding-left: 10px;*/
+          padding-top: 2px;
+          display: inline-block;
         }
         
         .option-holder {
@@ -88,6 +90,9 @@ class MyApp extends PolymerElement {
         .options:hover {
           font-size: 17px;
         }
+        img {
+          height:40px;
+        }
 
 
       </style>
@@ -105,8 +110,8 @@ class MyApp extends PolymerElement {
 
           <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 5px 0 #474747">
             <app-toolbar>
-              <div main-title="" class="logo">TrackIT</div>
-              <iron-selector selected="{{page}}" attr-for-selected="name">
+              <div main-title="" class="logo"><img src="../images/logo.png" main-title="" class="logo"></div>
+              <iron-selector selected="{{page}}" attr-for-selected="name" style="height:64px;">
                 <div class="option-holder" name="home"><div class="options" >Home</div></div>
                 <div class="option-holder" name="about"><div class="options" >About</div></div>
               </iron-selector>
@@ -114,7 +119,7 @@ class MyApp extends PolymerElement {
           </app-header>
 
           <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
-            <my-view1 name="home"></my-view1>
+            <my-view1 name="home" page="{{page}}"></my-view1>
             <my-view2 name="about"></my-view2>
             <my-view404 name="view404"></my-view404>
           </iron-pages>
