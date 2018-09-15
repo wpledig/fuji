@@ -35,11 +35,25 @@ class MyView1 extends PolymerElement {
           background-color: #fff;
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
         }
+        
+        .upload {
+          height: 64px;
+          width: 64px;
+        }
+        
+        .empty {
+        height: 0;
+        width: 0;
+        }
+        
+        
       </style>
 
       <div class="card">
-        <vaadin-upload>
-          <iron-icon slot="add-button" icon="my-icons:file-uploa"></iron-icon>
+        <vaadin-upload target="serverUrl" method="POST" timeout="300000" headers="{'X-Custom-Header': 'value'}" form-data-name="my-attachment">
+          <iron-icon class="upload" slot="add-button" icon="my-icons:file-upload"></iron-icon>
+          <div slot="drop-label-icon" class="empty"></div>
+          <div slot="drop-label" class="empty"></div>
         </vaadin-upload>
       </div>
       
