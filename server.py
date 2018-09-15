@@ -10,8 +10,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
 def upload():
+<<<<<<< HEAD
 	print("___UPLOAD___")
 	print(request)
+=======
+    print("___UPLOAD___")
+>>>>>>> fc7c6a2fb6c0ff3f63cec4a71a9588318c1e62c8
     file = request.files['file']
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
