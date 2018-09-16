@@ -34,7 +34,7 @@ class MyView1 extends PolymerElement {
         
         .card {
         width: 70%;
-        margin-top: 7%;
+        margin-top: 3%;
                   padding: 16px;
           text-align: center;
           display: inline-block;
@@ -182,6 +182,7 @@ class MyView1 extends PolymerElement {
     }
 
     goUpload() {
+      this.$.uploadButton.files = [];
       this.state = false;
     }
 

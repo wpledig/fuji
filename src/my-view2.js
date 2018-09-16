@@ -65,13 +65,11 @@ class MyView2 extends PolymerElement {
       </div>
       <div class="holder">
         <div class="question">How does it work?</div>
-        <div class="answer">The application breaks down inputted videos frame by frame, averages the pixels across ranges of frames, and inputs that into a variety of APIs (including Microsoft Azure's Vision and Emotion APIs) to compile data on various time segments across the video's duration.
-                            Once that is complete, this data is processed through a neural network to generate a MIDI file representative of the video's visuals.</div>
-      </div>
+        <div class="answer">Whenever a user uploads a video, fuji samples individual frames from the video at a specified time interval, and inputs those frames into a variety of APIs (including Microsoft Azure's Vision and Emotion APIs) to compute valence and arousal values (aka data on mood) throughout the video's duration. Once that's complete, this data is processed through a neural network to generate a MIDI file representative of the video's visuals.</div>
+     </div>
       <div class="holder">
         <div class="question">How was it built?</div>
-        <div class="answer">The entire front-end of the application was built in Polymer (a JavaScript library from Google for creating custom web components) 
-        while the back-end was developed with Flask and Python, with the assistance of APIs such as Microsoft Azure's Vision and Emotion APIs, ______, and ______.</div>
+        <div class="answer">TThe entire front-end of the application was built in Polymer (a JavaScript library from Google for creating custom web components) while the back-end was developed with Flask and Python, with the assistance of TensorFlow and APIs such as Microsoft Azure's Vision and Emotion APIs.</div>
       </div>
     </div>
     `;
