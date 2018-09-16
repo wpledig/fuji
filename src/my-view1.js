@@ -146,8 +146,7 @@ class MyView1 extends PolymerElement {
         </vaadin-upload>
         
         <div class="video-container">
-          <video width="640" height="360" controls>
-             <source src$="http://localhost:5000/parsemp4/[[filename]].mp4" type="video/mp4">
+          <video id="vid" width="640" height="360" controls src="http://127.0.0.1:5000/parsemp4/[[filename]]">
              <!-- http://localhost:5000/parsemp4/{{filename}}.mp4 -->
            </video>
         </div>
@@ -166,12 +165,12 @@ class MyView1 extends PolymerElement {
             },
             state: {
                 type: Boolean,
-                value: true,
+                value: false,
                 reflectToAttribute: true
             },
             filename: {
                 type: String,
-                value: 'test'
+                value: 'test.mp4'
             }
         };
     }
@@ -190,7 +189,6 @@ class MyView1 extends PolymerElement {
         this.$.uploadButton.addEventListener('upload-success', (e) => {
             console.log(e);
             this.filename = e.detail.file.name.split(' ').join('_');
-            console.log(this.filename);
             this.state = true;
         });
     }
