@@ -60,6 +60,8 @@ class MyApp extends PolymerElement {
           padding-left: 10px;
           padding-top: 2px;
           display: inline-block;
+          vertical-align: center;
+          position: relative;
         }
         
         .option-holder {
@@ -93,6 +95,15 @@ class MyApp extends PolymerElement {
         img {
           height:40px;
         }
+        .subtitle {
+        font-size: 13px;
+        margin-left: 10px;
+        vertical-align: center;
+        display: inline-block;
+        position: absolute;
+        transform: translate(0%,-50%);
+        top: 50%;
+        }
 
 
       </style>
@@ -112,7 +123,10 @@ class MyApp extends PolymerElement {
 
           <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 8px 0 rgba(71,71,71,0.75)">
             <app-toolbar>
-              <div main-title="" class="logo"><img src="../images/fujilogo1.png" main-title="" class="logo"></div>
+              <div main-title="" class="logo">
+                <img src="../images/fujilogo4.png" main-title="" class="logo">
+                <div class="subtitle">a background music generator</div>
+              </div>
               <iron-selector selected="{{page}}" attr-for-selected="name" style="height:64px;">
                 <div class="option-holder" name="home"><div class="options" >Home</div></div>
                 <div class="option-holder" name="about"><div class="options" >About</div></div>

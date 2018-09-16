@@ -4,7 +4,7 @@ import moviepy.editor
 
 def mp4parse(file_path, new_file_path):
     file = moviepy.editor.VideoFileClip(file_path)
-    file = file.subclip(0, file.duration - 60)
+    file = file.subclip(0, 60)
     audio = file.audio
     new_audio = fetch_audio(file).subclip(0, file.duration)
     print(new_audio.duration, file.duration)
