@@ -54,8 +54,8 @@ class MyView2 extends PolymerElement {
 
     <div class="question-list">
       <div class="holder">
-        <div class="question">What is TrackIT?</div>
-        <div class="answer">TrackIT is a web-application that takes in a video and returns music dynamically generated to fit the video. It was developed by Will Ledig and Joel Abraham for HackRice 8.</div>
+        <div class="question">What is fuji?</div>
+        <div class="answer">fuji is a web-application that takes in a video and returns music dynamically generated to fit the video. It was developed by Will Ledig and Joel Abraham for HackRice 8.</div>
       </div>
       <div class="holder">
         <div class="question">Do you have any examples?</div>

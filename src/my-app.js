@@ -57,7 +57,7 @@ class MyApp extends PolymerElement {
         }
         
         .logo {
-          /*padding-left: 10px;*/
+          padding-left: 10px;
           padding-top: 2px;
           display: inline-block;
         }
@@ -112,7 +112,7 @@ class MyApp extends PolymerElement {
 
           <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 8px 0 rgba(71,71,71,0.75)">
             <app-toolbar>
-              <div main-title="" class="logo"><img src="../images/logo.png" main-title="" class="logo"></div>
+              <div main-title="" class="logo"><img src="../images/fujilogo1.png" main-title="" class="logo"></div>
               <iron-selector selected="{{page}}" attr-for-selected="name" style="height:64px;">
                 <div class="option-holder" name="home"><div class="options" >Home</div></div>
                 <div class="option-holder" name="about"><div class="options" >About</div></div>
