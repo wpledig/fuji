@@ -4,5 +4,5 @@
 
 
 ```
-python3 -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+pip3 install git+https://github.com/vishnubob/python-midi@feature/python3
 ```
