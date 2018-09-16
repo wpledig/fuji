@@ -34,14 +34,15 @@ class MyView1 extends PolymerElement {
         
         .card {
         width: 70%;
-        margin-top: 20px;
+        margin-top: 50px;
                   padding: 16px;
           text-align: center;
           display: inline-block;
           color: #757575;
           border-radius: 5px;
           background-color: #fff;
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.23);
+          /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
         }
         .title-text {
           font-size: 30px;
@@ -111,6 +112,7 @@ class MyView1 extends PolymerElement {
         .main {
         position: relative;
         text-align: center;
+        vertical-align: center;
         }
         
         .about-link {
@@ -146,8 +148,7 @@ class MyView1 extends PolymerElement {
         </vaadin-upload>
         
         <div class="video-container">
-          <video width="640" height="360" controls>
-             <source src$="http://localhost:5000/parsemp4/[[filename]].mp4" type="video/mp4">
+          <video id="vid" width="640" height="360" controls src="http://127.0.0.1:5000/parsemp4/[[filename]]">
              <!-- http://localhost:5000/parsemp4/{{filename}}.mp4 -->
            </video>
         </div>
@@ -166,12 +167,12 @@ class MyView1 extends PolymerElement {
             },
             state: {
                 type: Boolean,
-                value: true,
+                value: false,
                 reflectToAttribute: true
             },
             filename: {
                 type: String,
-                value: 'test'
+                value: 'test.mp4'
             }
         };
     }
@@ -190,7 +191,6 @@ class MyView1 extends PolymerElement {
         this.$.uploadButton.addEventListener('upload-success', (e) => {
             console.log(e);
             this.filename = e.detail.file.name.split(' ').join('_');
-            console.log(this.filename);
             this.state = true;
         });
     }
