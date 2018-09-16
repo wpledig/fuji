@@ -2,6 +2,7 @@ from utils import cv
 from utils import combined_emotions as emotions
 from utils import generate_midi as generate
 import moviepy.editor
+import subprocess
 
 
 def mp4parse(file_path, new_file_path):
@@ -15,8 +16,6 @@ def mp4parse(file_path, new_file_path):
 
 
 def frame_anal(frame):
-    #print("frame-anal")
-
     frame_sum = 0
     pixel_count = 0.0
     for row in frame:
@@ -29,9 +28,10 @@ def frame_anal(frame):
 
 def generate_audio(file, sentiment_file_path):
     midi_file_path = "/Users/Joel/Desktop/hr8/midi/"+sentiment_file_path.split("/")[-1].split(".")[0]+".mid"
-    print(midi_file_path)
-    #generate.generate_music(sentiment_file_path, midi_file_path)
+    print(sentiment_file_path, midi_file_path)
 
+    #generate.generate_music(sentiment_file_path, midi_file_path)
+    #assert False
     ###############################################################
 
     ##         TODO: GENERATE AUDIO + CONVERT TO MP3
@@ -54,7 +54,6 @@ def fetch_audio(file, file_path):
     #print("Composite video score: "+str(video_sum))
     emotions.video_to_emotion_as_file(file_path, multiple=24) # generates sentiment_files/<filename>.
     sentiment_file_path = "/Users/Joel/Desktop/hr8/sentiment_files/"+file_path.split("/")[-1].split(".")[0]+".txt"
-    print(sentiment_file_path)
     return generate_audio(file, sentiment_file_path)
 
 

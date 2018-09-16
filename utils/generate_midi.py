@@ -12,32 +12,12 @@ num_timesteps = rbm.num_timesteps
 x, emotions, W, bh, bv = rbm.get_variables()
 
 def sample(probs):
-	"""
-	Given a vector of probabilities, each element is added to a random value between 0 and 1, and then 
-	rounded down to give a value of either 0 or 1. Higher input probabilities have a higher chance of being 1.
 
-	:param probs: vector of probablities
-	:type probs: tensor
-	:returns: vector of 0s and 1s sampled from the input vector
-	:rtype: tensor
-	"""
 	return tf.floor(probs + tf.random_uniform(tf.shape(probs), 0, 1))
 
 
 def sample_correct(probs, emotions):
-	"""
-	Given a vector of probabilities, each element is added to a random value between 0 and 1, and then 
-	rounded down to give a value of either 0 or 1. Higher input probabilities have a higher chance of being 1.
 
-	In addition to sampling, the emotion values are clamped to the last two elements of each timestep.
-
-	:param probs: vector of probablities
-	:param emotions: vector of 8 emotion values (4 arousal, 4 valence)
-	:type probs: tensor
-	:type emotions: tensor
-	:returns: vector of 0s and 1s sampled from the input vector
-	:rtype: tensor
-	"""
 	notes = tf.floor(probs + tf.random_uniform(tf.shape(probs), 0, 1))[0]
 	notes = tf.unstack(notes)
 	emotions = tf.unstack(emotions)
@@ -58,24 +38,9 @@ def sample_correct(probs, emotions):
 
 
 def gibbs_sample_generate(k):
-	"""
-	Runs k-step gibbs chain to sample from the probability distribution of the RBM defined by W, bh, bv.
 
-	:params k: number of gibbs step iterations to run
-	:type k: int
-	:returns: matrix of music sampled
-	:rtype: tensor
-	"""
 	def gibbs_step_generate(count, k, xk):
-		"""
-		Runs a single gibbs step
-		:param count: number of iterations done
-		:param k: total number of gibbs step iterations to run
-		:param xk: the visible values are initialized to xk.
-		:type count: int
-		:type k: int
-		:type xk: tensor
-		"""
+
 		hk = sample(tf.sigmoid(tf.matmul(xk, W) + bh)) # Propagate the visible values to sample the hidden values
 		tv = tf.matmul(hk, tf.transpose(W)) + bv	   # Propagate the hidden values to the visible values
 		xk = sample_correct(tf.sigmoid(tv), emotions)  # sample the visible values and clamp emotion values
@@ -83,42 +48,29 @@ def gibbs_sample_generate(k):
 
 	x_sample = x
 	# run gibbs steps for k iterations
-	ct = tf.constant(0) # initialize counter to 0
+	ct = tf.constant(0)
 	[_, _, x_sample] = tf.while_loop(lambda count, num_iter, *args: count < num_iter,
 										 gibbs_step_generate, [ct, tf.constant(k), x_sample])
-	# This is not strictly necessary in this implementation, but if you want to adapt this code to use one of TensorFlow's
-	# optimizers, you need this in order to stop tensorflow from propagating gradients back through the gibbs step
 	x_sample = tf.stop_gradient(x_sample) 
 	return x_sample
 
 
 def generate_music(emotion_text_file, midi_file_name):
-	"""
-	Given a series of emotion data points, the function will generate music that corresponds
-	to those emotion values. The system variables (weights and biases) will be loaded from a 
-	pre-trained model. Iterating through the emotion values, they're assigned to a matrix and
-	sent through the RBM to generate music. The music is saved as a midi file. 
 
-	:param emotion_text_file: path to text file holding emotion data
-	:param midi_file_name: name for midi file
-	:type emotion_text_file: str
-	:type midi_file_name: str
-	:returns: none 
-	:rtype: none
-	"""
-	saved_weights_path = "parameter_checkpoints/trained_system"	  # path to saved, trained model
+	tf.reset_default_graph()
+	saved_weights_path = "/utils/parameter_checkpoints/trained_system"	  # path to saved, trained model
 	trainable_vars = [W, bh, bv]
 	n_visible = rbm.n_visible
 	note_range = midi_manipulation.span
-	print("asdasdfa\n\n\n\n\n\n")
 	saver = tf.train.Saver(trainable_vars) # restore the weights and biases of the model
-	print("xx---x-x--x--x--x--x-x--x\n\n\n\n\n\n")
 	with tf.Session() as sess:
 		init = tf.initialize_all_variables()
 		sess.run(init)
+		print("hi")
 		saver.restore(sess, saved_weights_path) # load the saved weights and biases of the model
 		
-		text = open(emotion_text_file, 'r')		# open text file with emotion values
+		print("hi3")
+		text = open(emotion_text_file, 'r')		
 		x_ = np.zeros((1, n_visible))
 		j=156
 		emotions_ = np.array([])
@@ -130,15 +82,11 @@ def generate_music(emotion_text_file, midi_file_name):
 			v = float(emotion[1])		# valene value
 			e = np.array([a,v])
 			emotions_ = np.concatenate((emotions_, e), axis=0)
-			# add current arousal and valence values to 16 timesteps (when values extracted from
-			# video, it is done by default at a rate of 16 timesteps)
 			for i in range(16):
 				x_[0][j] = a
 				x_[0][j+1] = v
 				j += 158
 
-			# every four lines of emotion values, send x_ into the gibbs sampling function
-			# 4 lines = 64 timesteps -> size of visible layer = 64*158
 			if l%4==3:
 				# sample by running Gibbs chain 10 times
 				sample = gibbs_sample_generate(10).eval(session=sess, feed_dict={x: x_, emotions: emotions_})
@@ -150,9 +98,9 @@ def generate_music(emotion_text_file, midi_file_name):
 				else:
 					song = np.reshape(sample, (num_timesteps, (2*note_range+2)))
 				
-				# matrix returned from sample is the input into the next segment of 64 timesteps
+	
 				x_ = np.zeros((1, n_visible))
-				# emotions_ and j are reset for next iteration
+
 				emotions_ = np.array([])
 				j=156
 

@@ -14,7 +14,7 @@ def get_file_path(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    #generate.generate_music("/Users/Joel/Desktop/hr8/sentiment_files/bh.txt", "/Users/Joel/Desktop/hr8/midi/bh.midi")
+    #generate.generate_music("/Users/Joel/Desktop/hr8/sentiment_files/bh-----.txt", "/Users/Joel/Desktop/hr8/midi/bh.mid")
     return "'Johnny Johnny Yes Papa!' -- Will Ledig (2018)"
 
 
@@ -35,8 +35,8 @@ def parsemp4(filename):
     name, xtn = filename.split(".")
     new_filename = name+"_edited."+ xtn
     new_file_path = get_file_path(new_filename)
-    if(os.path.isfile(new_file_path)):
-        return send_file(new_file_path)
+    #if(os.path.isfile(new_file_path)):
+        #return send_file(new_file_path)
 
     video.mp4parse(get_file_path(filename), new_file_path)
     return send_file(new_file_path)
