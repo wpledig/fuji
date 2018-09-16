@@ -23,6 +23,7 @@ def upload():
         filename = secure_filename(file.filename)
         path = get_file_path(filename)
         file.save(path)
+        print("________")
         return redirect(url_for('parsemp4', filename=filename))
     else:
         assert False
@@ -30,6 +31,8 @@ def upload():
 
 @app.route('/parsemp4/<filename>')
 def parsemp4(filename):
+    print("calll")
+    print(filename)
     name, xtn = filename.split(".")
     new_filename = name+"_edited."+ xtn
     new_file_path = get_file_path(new_filename)
