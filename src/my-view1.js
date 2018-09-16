@@ -34,7 +34,7 @@ class MyView1 extends PolymerElement {
         
         .card {
         width: 70%;
-        margin-top: 50px;
+        margin-top: 7%;
                   padding: 16px;
           text-align: center;
           display: inline-block;
@@ -138,7 +138,7 @@ class MyView1 extends PolymerElement {
      <div class="goback-text">(To generate background music for another video, <span class="about-link" on-click="goUpload">click here</span>.)</div>
      
      
-        <vaadin-upload id="uploadButton" target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
+        <vaadin-upload max-files="1" accept=".mp4" id="uploadButton" target="http://127.0.0.1:5000/upload" method="POST" timeout="300000" headers='{"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type"}' >
           <div slot="add-button" style="text-align: center; display: inline-block; margin-right: -14px;">
             <iron-icon class="upload" icon="my-icons:file-upload"></iron-icon>
             <div style="display: block; text-align: center;">Drop Files Here</div>

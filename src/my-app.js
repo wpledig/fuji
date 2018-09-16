@@ -110,7 +110,7 @@ class MyApp extends PolymerElement {
         <!-- Main content -->
         <app-header-layout has-scrolling-region="">
 
-          <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 5px 0 #474747">
+          <app-header slot="header" condenses="" reveals="" effects="waterfall" style="box-shadow: 0 0 8px 0 rgba(71,71,71,0.75)">
             <app-toolbar>
               <div main-title="" class="logo"><img src="../images/logo.png" main-title="" class="logo"></div>
               <iron-selector selected="{{page}}" attr-for-selected="name" style="height:64px;">

@@ -44,6 +44,9 @@ class MyView2 extends PolymerElement {
         .answer {
             font-size: 15px;
         }
+        video {
+        display: inline-block;
+        }
       </style>
 
         
@@ -52,19 +55,23 @@ class MyView2 extends PolymerElement {
     <div class="question-list">
       <div class="holder">
         <div class="question">What is TrackIT?</div>
-        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham for HackRice 8.</div>
+        <div class="answer">TrackIT is a web-application that takes in a video and returns music dynamically generated to fit the video. It was developed by Will Ledig and Joel Abraham for HackRice 8.</div>
       </div>
       <div class="holder">
-        <div class="question">What is TrackIT?</div>
-        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">Do you have any examples?</div>
+        <div class="answer" style="margin-bottom: 10px;">Yes! Here are some examples we feel demonstrate the power of our application:</div>
+        <video height="160" width="284" src="../mp4/test.mp4" controls style="padding-right: 60px;"></video>
+        <video height="160" width="284" src="../mp4/test_edited.mp4" controls></video>
       </div>
       <div class="holder">
-        <div class="question">What is TrackIT?</div>
-        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">How does it work?</div>
+        <div class="answer">The application breaks down inputted videos frame by frame, averages the pixels across ranges of frames, and inputs that into a variety of APIs (including Microsoft Azure's Vision and Emotion APIs) to compile data on various time segments across the video's duration.
+                            Once that is complete, this data is processed through a neural network to generate a MIDI file representative of the video's visuals.</div>
       </div>
       <div class="holder">
-        <div class="question">What is TrackIT?</div>
-        <div class="answer">TrackIT is a thing that does stuff. It was developed by Will Ledig and Joel Abraham </div>
+        <div class="question">How was it built?</div>
+        <div class="answer">The entire front-end of the application was built in Polymer (a JavaScript library from Google for creating custom web components) 
+        while the back-end was developed with Flask and Python, with the assistance of APIs such as Microsoft Azure's Vision and Emotion APIs, ______, and ______.</div>
       </div>
     </div>
     `;
