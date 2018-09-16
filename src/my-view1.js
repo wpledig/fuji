@@ -34,14 +34,15 @@ class MyView1 extends PolymerElement {
         
         .card {
         width: 70%;
-        margin-top: 20px;
+        margin-top: 50px;
                   padding: 16px;
           text-align: center;
           display: inline-block;
           color: #757575;
           border-radius: 5px;
           background-color: #fff;
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.23);
+          /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
         }
         .title-text {
           font-size: 30px;
@@ -111,6 +112,7 @@ class MyView1 extends PolymerElement {
         .main {
         position: relative;
         text-align: center;
+        vertical-align: center;
         }
         
         .about-link {
