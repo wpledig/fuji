@@ -4,13 +4,11 @@ from flask import *
 import generate_midi as generate
 from werkzeug.utils import secure_filename
 
-!
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "mp4"
 
 def get_file_path(filename):
     return os.path.join(app.config["UPLOAD_FOLDER"], str(filename))
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
