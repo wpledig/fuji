@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "mp4"
+app.config["UPLOADS"] = []
 
 def get_file_path(filename):
     return os.path.join(app.config["UPLOAD_FOLDER"], str(filename))
@@ -35,10 +36,10 @@ def parsemp4(filename):
     name, xtn = filename.split(".")
     new_filename = name+"_edited."+ xtn
     new_file_path = get_file_path(new_filename)
-    #if(os.path.isfile(new_file_path)):
-        #return send_file(new_file_path)
-
+    if(filename in app.config["UPLOADS"]):
+        return send_file(new_file_path)
     video.mp4parse(get_file_path(filename), new_file_path)
+    app.config["UPLOADS"].append(filename)
     return send_file(new_file_path)
 
 
