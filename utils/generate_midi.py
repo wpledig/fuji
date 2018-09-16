@@ -2,9 +2,9 @@
 
 import tensorflow as tf
 import numpy as np
-from utils import rbm
+import rbm
 from tensorflow.python.ops import control_flow_ops
-from utils import midi_manipulation
+import midi_manipulation
 from tqdm import tqdm
 
 
@@ -161,4 +161,4 @@ def generate_music(emotion_text_file, midi_file_name):
 	return
 
 if __name__ == "__main__":
-	generate_music("/Users/Joel/Desktop/hr8/sentiment_files/bh.txt", "/Users/Joel/Desktop/hr8/midi/bh.midi")
+	generate_music("/Users/willledig/Documents/HackRice/HackRice 8/Polymer-A/sentiment_files/nature.txt", "/Users/willledig/Documents/HackRice/HackRice 8/Polymer-A/midi/nature.midi")
