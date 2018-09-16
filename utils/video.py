@@ -1,6 +1,6 @@
-import cv
-import combined_emotions as emotions
-import generate_midi as generate
+from utils import cv
+from utils import combined_emotions as emotions
+from utils import generate_midi as generate
 import moviepy.editor
 
 

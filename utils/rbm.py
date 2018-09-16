@@ -1,7 +1,7 @@
 # Code based on Dan Shiebler's RBM music generator: https://github.com/dshieble/Music_RBM
 
 import tensorflow as tf
-import midi_manipulation
+from utils import midi_manipulation
 
 note_range = midi_manipulation.span # The range of notes that we can produce (=78)
 

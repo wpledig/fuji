@@ -2,9 +2,9 @@
 
 import tensorflow as tf
 import numpy as np
-import rbm
+from utils import rbm
 from tensorflow.python.ops import control_flow_ops
-import midi_manipulation
+from utils import midi_manipulation
 from tqdm import tqdm
 
 

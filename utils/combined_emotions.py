@@ -1,5 +1,5 @@
-from dominant_colors import run_dominant_colors
-from emotions_api import run_emotion_api
+from utils.dominant_colors import run_dominant_colors
+from utils.emotions_api import run_emotion_api
 
 
 def video_to_emotion(file_name, music_bpm=120, k=8, multiple=16):
