@@ -60,8 +60,8 @@ class MyView2 extends PolymerElement {
       <div class="holder">
         <div class="question">Do you have any examples?</div>
         <div class="answer" style="margin-bottom: 10px;">Yes! Here are some examples we feel demonstrate the power of our application:</div>
-        <video height="160" width="284" src="../mp4/test.mp4" controls style="padding-right: 60px;"></video>
-        <video height="160" width="284" src="../mp4/test_edited.mp4" controls></video>
+        <video height="160" width="284" src="../mp4/Rgm_Project_edited.mp4" controls style="padding-right: 60px;"></video>
+        <video height="160" width="284" src="../mp4/nature_edited.mp4" controls></video>
       </div>
       <div class="holder">
         <div class="question">How does it work?</div>
