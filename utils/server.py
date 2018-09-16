@@ -1,10 +1,10 @@
 import os
-from utils import video
+import video
 from flask import *
 import generate_midi as generate
 from werkzeug.utils import secure_filename
 
-!
+
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "mp4"
 
@@ -14,7 +14,7 @@ def get_file_path(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    generate.generate_music("/Users/Joel/Desktop/hr8/sentiment_files/bh.txt", "/Users/Joel/Desktop/hr8/midi/bh.midi")
+    #generate.generate_music("/Users/Joel/Desktop/hr8/sentiment_files/bh.txt", "/Users/Joel/Desktop/hr8/midi/bh.midi")
     return "'Johnny Johnny Yes Papa!' -- Will Ledig (2018)"
 
 
